@@ -22,9 +22,9 @@ public class GetAccessTokenTest {
     public String access_token="";
     public String token_type="";
     public static final String ARTIST_ID="4Z8W4fKeB5YxbusRsdQVPb";
-    private String authorizationCode="AQCn1QE-EboUvL5US0FEkwHu3UW0G2BjqfJ4ui7iF5QlYp74kSApzPoIW6JVPcV5C9Rd2ktlAQLq0SjcwxRbnmeTOWEzzo580vTrDyRfCXMTAGXGeYYIjEGRfNHPQjvtKOb-b9liOuEuPDotpCWDCaP-tvsKFFV_DRH8kl5-AqksWvbo1e63__S3fbp3CB5TWymVuzXsHWhVx8qH3uXdJNLZSrewXNAO8QwpZekwbBCA79G-LlXPcSnWbIhbs9q55LBp4081VACt5wUcDOws2U3DA9EXa7iU1amFOEpHTg";
-    private String client_id="d33768f0a3a94c88955ff29dcccd828a";
-    private String client_secret="bdeda19f414d4463b82c535b24d4b18c";
+    private String authorizationCode="";
+    private String client_id="";
+    private String client_secret="";
     private String refresh_token="";
     
     
@@ -34,8 +34,8 @@ public class GetAccessTokenTest {
         ResponseBody responseBody = given().baseUri("https://accounts.spotify.com").
                 header("Content-Type", "application/x-www-form-urlencoded").
                 formParam("grant_type", "authorization_code").
-                formParam("client_id", "d33768f0a3a94c88955ff29dcccd828a").
-                formParam("client_secret", "bdeda19f414d4463b82c535b24d4b18c")
+                formParam("client_id", client_id).
+                formParam("client_secret", client_secret)
                 .when().post("/api/token").
                 then().log().all().
                 statusCode(200)
@@ -69,7 +69,7 @@ public class GetAccessTokenTest {
         header("Authorization","Basic "+base64Encoder).
                 header("Content-Type","application/x-www-form-urlencoded").
                 formParam("grant_type","authorization_code").
-                formParam("code","AQBJa8ko4k3ax3JkWvJIeohSsSYh3v0s7jRcfrGq2tcDfHjr9E9K52MSAKWBh-c3k00550UWyd1uNPtts6qJBAQ40Z0_IvAhVmXufMkYDEqeysXfdG7sYAkrf-7sVIv8Wbo8wk6TcMP-y6apR60AaCBArD5HwcKGv3MJQTnc2ph1dUKMAuWQgUSB6UbUM6PcUHcbUjkW46i8zJS0-uZ7iuxXBnlQ7YJw2SvWBXhQNinTH2gPxyMOWQrQtPtTx4zK-xNaRwPlVD8Cy340G6UzJWVgXp1mDIJ9GYvZfmocAA").log().all().
+                formParam("code",authorizationCode).log().all().
                 formParam("redirect_uri","https://localhost:8080").
                 
                 when().post("/api/token").then().log().all().statusCode(200).extract().response();
